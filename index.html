@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Games Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .game-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .game-container iframe {
+            width: 300px;
+            height: 200px;
+            border: none;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-group button:hover {
+            opacity: 0.9;
+        }
+        #welcomeMessage {
+            display: none;
+        }
+        #signUpForm {
+            display: block;
+        }
+        .game-container h3 {
+            margin: 0;
+            padding: 10px;
+        }
+        .game-container button, .game-container input {
+            margin-top: 10px;
+        }
+        #ticTacToe .row {
+            display: flex;
+        }
+        #ticTacToe .row button {
+            width: 60px;
+            height: 60px;
+            margin: 2px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="signUpForm">
+            <h2>Sign Up</h2>
+            <input type="email" id="signupEmail" placeholder="Enter your email">
+            <input type="password" id="signupPassword" placeholder="Enter your password">
+            <button onclick="handleSignUp()">Sign Up</button>
+        </div>
+
+        <div id="welcomeMessage"></div>
+
+        <div id="gameSelection" class="button-group" style="display: none;">
+            <h2>Select a Game</h2>
+            <button onclick="showGame(1)">Game 1</button>
+            <button onclick="showGame(2)">Game 2</button>
+            <button onclick="showGame(3)">Game 3</button>
+            <button onclick="showGame(4)">Game 4</button>
+            <button onclick="showGame(5)">Game 5</button>
+            <button onclick="showGame(6)">Game 6</button>
+            <button onclick="showGame(7)">Game 7</button>
+            <button onclick="showGame(8)">Game 8</button>
+            <button onclick="showGame(9)">Game 9</button>
+            <button onclick="showGame(10)">Game 10</button>
+            <button onclick="showGame(11)">Game 11</button>
+            <button onclick="showGame(12)">Game 12</button>
+            <button onclick="showGame(13)">Game 13</button>
+            <button onclick="showGame(14)">Game 14</button>
+            <button onclick="showGame(15)">Game 15</button>
+            <button onclick="showGame(16)">Game 16</button>
+            <button onclick="showGame(17)">Game 17</button>
+            <button onclick="showGame(18)">Game 18</button>
+            <button onclick="showGame(19)">Game 19</button>
+            <button onclick="showGame(20)">Game 20</button>
+        </div>
+
+        <div id="game1" class="game-container">
+            <h3>Game 1: Click the Button</h3>
+            <button onclick="alert('You clicked the button!')">Click Me!</button>
+        </div>
+        
+        <div id="game2" class="game-container">
+            <h3>Game 2: Color Change</h3>
+            <button onclick="changeColor()">Change My Color</button>
+            <script>
+                function changeColor() {
+                    document.querySelector('#game2 button').style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                }
+            </script>
+        </div>
+
+        <div id="game3" class="game-container">
+            <h3>Game 3: Simple Counter</h3>
+            <p id="counter">0</p>
+            <button onclick="incrementCounter()">Increment</button>
+            <script>
+                let count = 0;
+                function incrementCounter() {
+                    count++;
+                    document.getElementById('counter').innerText = count;
+                }
+            </script>
+        </div>
+
+        <div id="game4" class="game-container">
+            <h3>Game 4: Guess the Number</h3>
+            <input type="number" id="guess" placeholder="Enter a number between 1 and 10">
+            <button onclick="guessNumber()">Guess</button>
+            <p id="guessResult"></p>
+            <script>
+                const randomNumber = Math.floor(Math.random() * 10) + 1;
+                function guessNumber() {
+                    const guess = document.getElementById('guess').value;
+                    const result = document.getElementById('guessResult');
+                    if (guess == randomNumber) {
+                        result.innerText = 'Correct! The number was ' + randomNumber;
+                    } else {
+                        result.innerText = 'Try again!';
+                    }
+                }
+            </script>
+        </div>
+
+        <div id="game5" class="game-container">
+            <h3>Game 5: Simple Math Quiz</h3>
+            <p id="mathQuestion"></p>
+            <input type="number" id="mathAnswer" placeholder="Your answer">
+            <button onclick="checkMath()">Submit</button>
+            <p id="mathResult"></p>
+            <script>
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                const correctAnswer = num1 + num2;
+                document.getElementById('mathQuestion').innerText = `What is ${num1} + ${num2}?`;
+                function checkMath() {
+                    const answer = document.getElementById('mathAnswer').value;
+                    const result = document.getElementById('mathResult');
+                    if (parseInt(answer) === correctAnswer) {
+                        result.innerText = 'Correct!';
+                    } else {
+                        result.innerText = 'Incorrect. Try again!';
+                    }
+                }
+            </script>
+        </div>
+
+        <div id="game6" class="game-container">
+            <h3>Game 6: Word Scramble</h3>
+            <p id="scrambledWord"></p>
+            <input type="text" id="wordGuess" placeholder="Your guess">
+            <button onclick="checkWord()">Submit</button>
+            <p id="wordResult"></p>
+            <script>
+                const words = ['javascript', 'html', 'css', 'react', 'node'];
+                const word = words[Math.floor(Math.random() * words.length)];
+                const scrambled = word.split('').sort(() => 0.5 - Math.random()).join('');
+                document.getElementById('scrambledWord').innerText = scrambled;
+                function checkWord() {
+                    const guess = document.getElementById('wordGuess').value;
+                    const result = document.getElementById('wordResult');
+                    if (guess === word) {
+                        result.innerText = 'Correct!';
+                    } else {
+                        result.innerText = 'Incorrect. Try again!';
+                    }
+                }
+            </script>
+        </div>
+
+        <div id="game7" class="game-container">
+            <h3>Game 7: Toggle Visibility</h3>
+            <div id="toggleContent">Toggle me!</div>
+            <button onclick="toggleVisibility()">Toggle</button>
+            <script>
+                function toggleVisibility() {
+                    const content = document.getElementById('toggleContent');
+                    content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                }
+            </script>
+        </div>
+
+        <div id="game8" class="game-container">
+            <h3>Game 8: Text Animation</h3>
+            <p id="animatedText">Watch me change!</p>
+            <button onclick="animateText()">Animate</button>
+            <script>
+                function animateText() {
+                    const text = document.getElementById('animatedText');
+                    text.style.fontSize = Math.random() * 40 + 10 + 'px';
+                    text.style.color = '#' + Math.floor(Math.random() * 167772
+
+15).toString(16);
+                }
+            </script>
+        </div>
+
+        <div id="game9" class="game-container">
+            <h3>Game 9: Simple Drawing</h3>
+            <canvas id="drawingCanvas" width="300" height="200" style="border:1px solid #000;"></canvas>
+            <script>
+                const canvas = document.getElementById('drawingCanvas');
+                const context = canvas.getContext('2d');
+                canvas.addEventListener('mousedown', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    context.fillStyle = 'black';
+                    context.fillRect(x, y, 5, 5);
+                });
+            </script>
+        </div>
+
+        <div id="game10" class="game-container">
+            <h3>Game 10: Tic Tac Toe</h3>
+            <div id="ticTacToe">
+                <div class="row">
+                    <button onclick="makeMove(0, 0)"></button>
+                    <button onclick="makeMove(0, 1)"></button>
+                    <button onclick="makeMove(0, 2)"></button>
+                </div>
+                <div class="row">
+                    <button onclick="makeMove(1, 0)"></button>
+                    <button onclick="makeMove(1, 1)"></button>
+                    <button onclick="makeMove(1, 2)"></button>
+                </div>
+                <div class="row">
+                    <button onclick="makeMove(2, 0)"></button>
+                    <button onclick="makeMove(2, 1)"></button>
+                    <button onclick="makeMove(2, 2)"></button>
+                </div>
+            </div>
+            <script>
+                let turn = 'X';
+                const board = [
+                    ['', '', ''],
+                    ['', '', ''],
+                    ['', '', '']
+                ];
+                function makeMove(row, col) {
+                    if (board[row][col] === '') {
+                        board[row][col] = turn;
+                        document.querySelectorAll('#ticTacToe button')[row * 3 + col].innerText = turn;
+                        turn = turn === 'X' ? 'O' : 'X';
+                        checkWinner();
+                    }
+                }
+                function checkWinner() {
+                    const winPatterns = [
+                        [[0,0], [0,1], [0,2]], [[1,0], [1,1], [1,2]], [[2,0], [2,1], [2,2]], // horizontal
+                        [[0,0], [1,0], [2,0]], [[0,1], [1,1], [2,1]], [[0,2], [1,2], [2,2]], // vertical
+                        [[0,0], [1,1], [2,2]], [[0,2], [1,1], [2,0]] // diagonals
+                    ];
+                    winPatterns.forEach(pattern => {
+                        const [a, b, c] = pattern;
+                        if (board[a[0]][a[1]] && board[a[0]][a[1]] === board[b[0]][b[1]] && board[a[0]][a[1]] === board[c[0]][c[1]]) {
+                            alert('Player ' + board[a[0]][a[1]] + ' wins!');
+                            resetBoard();
+                        }
+                    });
+                }
+                function resetBoard() {
+                    board.forEach(row => row.fill(''));
+                    document.querySelectorAll('#ticTacToe button').forEach(button => button.innerText = '');
+                }
+            </script>
+        </div>
+
+        <!-- Additional games from 11 to 20 -->
+
+        <div id="game11" class="game-container">
+            <h3>Game 11: Dice Roll</h3>
+            <button onclick="rollDice()">Roll Dice</button>
+            <p id="diceResult"></p>
+            <script>
+                function rollDice() {
+                    const result = Math.floor(Math.random() * 6) + 1;
+                    document.getElementById('diceResult').innerText = 'You rolled a ' + result;
+                }
+            </script>
+        </div>
+
+        <div id="game12" class="game-container">
+            <h3>Game 12: Random Joke</h3>
+            <button onclick="showJoke()">Tell Me a Joke</button>
+            <p id="jokeResult"></p>
+            <script>
+                function showJoke() {
+                    const jokes = [
+                        'Why don’t scientists trust atoms? Because they make up everything!',
+                        'Why did the scarecrow win an award? Because he was outstanding in his field!',
+                        'What do you call fake spaghetti? An impasta!'
+                    ];
+                    const joke = jokes[Math.floor(Math.random() * jokes.length)];
+                    document.getElementById('jokeResult').innerText = joke;
+                }
+            </script>
+        </div>
+
+        <div id="game13" class="game-container">
+            <h3>Game 13: Simple Slider</h3>
+            <input type="range" id="slider" min="0" max="100">
+            <p id="sliderValue">Value: 50</p>
+            <script>
+                const slider = document.getElementById('slider');
+                const sliderValue = document.getElementById('sliderValue');
+                slider.oninput = function() {
+                    sliderValue.innerText = 'Value: ' + this.value;
+                }
+            </script>
+        </div>
+
+        <div id="game14" class="game-container">
+            <h3>Game 14: Simple Form</h3>
+            <form id="simpleForm">
+                <input type="text" placeholder="Your Name">
+                <button type="submit">Submit</button>
+            </form>
+            <p id="formResponse"></p>
+            <script>
+                document.getElementById('simpleForm').onsubmit = function(event) {
+                    event.preventDefault();
+                    document.getElementById('formResponse').innerText = 'Form submitted successfully!';
+                }
+            </script>
+        </div>
+
+        <div id="game15" class="game-container">
+            <h3>Game 15: Text Reverse</h3>
+            <input type="text" id="textInput" placeholder="Type text here">
+            <button onclick="reverseText()">Reverse Text</button>
+            <p id="reversedText"></p>
+            <script>
+                function reverseText() {
+                    const text = document.getElementById('textInput').value;
+                    document.getElementById('reversedText').innerText = text.split('').reverse().join('');
+                }
+            </script>
+        </div>
+
+        <div id="game16" class="game-container">
+            <h3>Game 16: Countdown Timer</h3>
+            <input type="number" id="countdownInput" placeholder="Seconds">
+            <button onclick="startCountdown()">Start Countdown</button>
+            <p id="countdownResult"></p>
+            <script>
+                function startCountdown() {
+                    let time = parseInt(document.getElementById('countdownInput').value);
+                    const result = document.getElementById('countdownResult');
+                    result.innerText = time;
+                    const interval = setInterval(() => {
+                        time--;
+                        result.innerText = time;
+                        if (time <= 0) {
+                            clearInterval(interval);
+                            result.innerText = 'Time is up!';
+                        }
+                    }, 1000);
+                }
+            </script>
+        </div>
+
+        <div id="game17" class="game-container">
+            <h3>Game 17: Guess the Color</h3>
+            <button onclick="guessColor()">Guess Color</button>
+            <p id="colorResult"></p>
+            <script>
+                function guessColor() {
+                    const colors = ['red', 'green', 'blue', 'yellow', 'orange'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    document.body.style.backgroundColor = color;
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = '#f0f0f0';
+                    }, 2000);
+                    document.getElementById('colorResult').innerText = 'The color was ' + color;
+                }
+            </script>
+        </div>
+
+        <div id="game18" class="game-container">
+            <h3>Game 18: Simple Quiz</h3>
+            <p id="quizQuestion">What is the capital of France?</p>
+            <button onclick="showAnswer('Paris')">Paris</button>
+            <button onclick="showAnswer('London')">London</button>
+            <p id="quizAnswer"></p>
+            <script>
+                function showAnswer(answer) {
+                    const correctAnswer = 'Paris';
+                    const result = document.getElementById('quizAnswer');
+                    result.innerText = answer === correctAnswer ? 'Correct!' : 'Incorrect.';
+                }
+            </script>
+        </div>
+
+        <div id="game19" class="game-container">
+            <h3>Game 19: Number Guessing Game</h3>
+            <input type="number" id="numberGuess" placeholder="Guess a number between 1 and 100">
+            <button onclick="guessNumberGame()">Guess</button>
+            <p id="numberResult"></p>
+            <script>
+                const randomNum = Math.floor(Math.random() * 100) + 1;
+                function guessNumberGame()
+
+ {
+                    const guess = document.getElementById('numberGuess').value;
+                    const result = document.getElementById('numberResult');
+                    if (guess == randomNum) {
+                        result.innerText = 'Congratulations! You guessed the number!';
+                    } else {
+                        result.innerText = 'Try again!';
+                    }
+                }
+            </script>
+        </div>
+
+        <div id="game20" class="game-container">
+            <h3>Game 20: Simple Reaction Test</h3>
+            <button onclick="startReactionTest()">Start Test</button>
+            <p id="reactionResult"></p>
+            <script>
+                let testStarted = false;
+                let startTime;
+                function startReactionTest() {
+                    if (testStarted) return;
+                    testStarted = true;
+                    document.getElementById('reactionResult').innerText = 'Click as fast as you can!';
+                    startTime = new Date().getTime();
+                    setTimeout(() => {
+                        document.getElementById('reactionResult').innerText = 'Click now!';
+                        document.body.onclick = () => {
+                            const reactionTime = new Date().getTime() - startTime;
+                            document.getElementById('reactionResult').innerText = 'Reaction time: ' + reactionTime + ' ms';
+                            testStarted = false;
+                        };
+                    }, Math.random() * 5000);
+                }
+            </script>
+        </div>
+
+    </div>
+
+    <script>
+        function handleSignUp() {
+            const email = document.getElementById('signupEmail').value;
+            if (email) {
+                document.getElementById('signUpForm').style.display = 'none';
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                welcomeMessage.innerText = 'Welcome ' + email + '!';
+                welcomeMessage.style.display = 'block';
+                setTimeout(() => {
+                    welcomeMessage.style.display = 'none';
+                    document.getElementById('gameSelection').style.display = 'block';
+                }, 3000);
+            }
+        }
+
+        function showGame(gameNumber) {
+            document.querySelectorAll('.game-container').forEach(container => container.style.display = 'none');
+            document.getElementById('game' + gameNumber).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
